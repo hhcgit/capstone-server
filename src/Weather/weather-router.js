@@ -3,20 +3,24 @@ const weatherRouter = express.Router();
 const bodyParser = express.json();
 const weatherApi = require('../Services/weatherApi')
 
+
+
 weatherRouter
-.route('/')
+.route('/:locKey')
 .get(bodyParser, (req,res,next) => { 
-    const { ip } = req.body
-    if(!ip){
+    const { locKey } = req.params
+    if(!locKey){
         return res.status(400).json({
-            error:'Missing IP adress in request body'
+            error:'Missing Location Key in request body'
         });
     }
-    res.status(200).send(ip)
-    // weatherApi.getWeather(ip)
-    // .then(weather => {
-    //   res.send(weather)
-    // })
+    return weatherApi.getWeather(locKey).then(weather=> {
+        const { Day, Night } = weather.DailyForecasts[0]
+        const out = [Day, Night]
+        return res.json(out)
+    })
+        
+    .catch(err => console.log('request failed',err))
 
   })
   module.exports = weatherRouter
