@@ -26,8 +26,6 @@ const UsersService = {
       return db
         .insert(newUser)
         .into('cactus_users')
-        .returning('*')
-        .then(([user]) => user)
     },
     hashPassword(password) {
       return bcrypt.hash(password, 12)

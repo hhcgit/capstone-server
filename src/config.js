@@ -5,6 +5,7 @@ module.exports = {
     PLANT_API_KEY:process.env.PLANT_API_KEY,
     WEATHER_API_KEY:process.env.WEATHER_API_KEY,  
     DB_URL:process.env.DB_URL,
+    ssl:true,
     JWT_SECRET:process.env.JWT_SECRET,
     EMAIL:process.env.EMAIL,
     PASS:process.env.PASS

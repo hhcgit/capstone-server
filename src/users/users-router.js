@@ -28,15 +28,13 @@ usersRouter
                 const newUser = {
                   user_name,
                   password: hashedPassword,
-                  email,
-                  date_created: 'now()',
+                  email
                 }
-    
                 return UsersService.insertUser(
                   req.app.get('db'),
                   newUser
                 )
-                  .then(user => {
+                  .then(() => {
                     res
                       .status(201)
                       .json('success')
